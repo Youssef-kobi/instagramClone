@@ -5,6 +5,9 @@ import * as PATHS from './constants/routes'
 const App = () => {
   // eslint-disable-next-line
   const Login = lazy(() => import('./pages/Login'))
+  const Register = lazy(() => import('./pages/Register'))
+
+  const NotFound = lazy(() => import('./pages/NotFound'))
   return (
     <BrowserRouter>
       <Routes>
@@ -14,6 +17,22 @@ const App = () => {
           element={
             <Suspense fallback={<p>Loading...</p>}>
               <Login />
+            </Suspense>
+          }
+        />
+        <Route
+          path={PATHS.SIGNUP}
+          element={
+            <Suspense fallback={<p>Loading...</p>}>
+              <Register />
+            </Suspense>
+          }
+        />
+        <Route
+          path={PATHS.NOTFOUND}
+          element={
+            <Suspense fallback={<p>Loading...</p>}>
+              <NotFound />
             </Suspense>
           }
         />
