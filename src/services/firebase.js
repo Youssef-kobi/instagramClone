@@ -1,6 +1,6 @@
-import { firebase } from '../lib/firebase'
+import { FieldValue, firebase } from '../lib/firebase'
 
-const doesUsernameExist = async (username) => {
+export const doesUsernameExist = async (username) => {
   const result = await firebase
     .firestore()
     .collection('users')
@@ -9,4 +9,67 @@ const doesUsernameExist = async (username) => {
   return result.docs.length > 0
 }
 
-export default doesUsernameExist
+export const getUserByUserId = async (userId) => {
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    .where('userId', '==', userId)
+    .get()
+  // console.log(result)
+  // const user = { ...result.docs[0].data(), docId: result.docs[0].id }
+  // without mapping as there wont be two user with the same uid
+  const user = result.docs.map((item) => {
+    return { ...item.data(), docId: item.id }
+  })
+  return user
+}
+
+export const getSuggestedProfiles = async (userId, following) => {
+  let query = await firebase.firestore().collection('users')
+  query =
+    (await following.length) > 0
+      ? query.where('userId', 'not-in', [...following, userId])
+      : query.where('userId', '!==', userId)
+  const result = await query.limit(10).get()
+  const profiles = result.docs.map((doc) => ({ ...doc.data(), docId: doc.id }))
+  // const profiles = result.docs
+  //   .map((doc) => ({ ...doc.data(), docId: doc.id }))
+  //   .filter(
+  //     (profile) =>
+  //       profile.userId !== userId && !following.includes(profile.userId)
+  //   )
+  // console.log(result)
+  return profiles
+}
+
+export const updateLoggedInUserFollowing = async (
+  LoggedInUserDocId,
+  profileId,
+  isFollowingProfile
+) => {
+  return firebase
+    .firestore()
+    .collection('users')
+    .doc(LoggedInUserDocId)
+    .update({
+      following: isFollowingProfile
+        ? FieldValue.arrayRemove(profileId)
+        : FieldValue.arrayUnion(profileId),
+    })
+}
+
+export const updateFollowedUserFollowers = async (
+  SuggestedProfileDocId,
+  userId,
+  isFollowingProfile
+) => {
+  return firebase
+    .firestore()
+    .collection('users')
+    .doc(SuggestedProfileDocId)
+    .update({
+      followers: isFollowingProfile
+        ? FieldValue.arrayRemove(userId)
+        : FieldValue.arrayUnion(userId),
+    })
+}

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FirebaseContext from '../context/firebase'
 import * as PATHS from '../constants/routes'
-import doesUsernameExist from '../services/firebase'
+import { doesUsernameExist } from '../services/firebase'
 
 const Register = () => {
   const Navigate = useNavigate()

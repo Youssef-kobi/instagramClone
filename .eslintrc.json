@@ -42,12 +42,15 @@
         "ignoreTemplateLiterals": true,
         "ignoreRegExpLiterals": true
       }
-    ],
-    // "no-restricted-imports": "0"
-    "no-restricted-imports": "off"
+    ]
   },
+  // "parser": "babel-eslint",
   "parserOptions": {
+    "ecmaVersion": "latest",
     "sourceType": "module",
-    "ecmaVersion": "latest"
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    }
   }
 }
