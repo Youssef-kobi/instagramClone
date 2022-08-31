@@ -7,8 +7,6 @@ import * as PATHS from '../constants/routes'
 const Header = () => {
   const { firebase } = useContext(FirebaseContext)
   const { user } = useContext(UserContext)
-  console.log(firebase)
-  console.log(user)
   useEffect(() => {}, [])
   return (
     <header className='h-16 bg-white border-b border-gray-primary mb-8 '>
