@@ -14,6 +14,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Profile = lazy(() => import('./pages/Profile'))
 
 const PrivateOutlet = () => {
   const { user } = useAuthListener()
@@ -42,9 +43,10 @@ const App = () => {
               <Route path={PATHS.SIGNUP} element={<Register />} />
             </Route>
             <Route element={<PrivateOutlet />}>
-              <Route path={PATHS.NOTFOUND} element={<NotFound />} />
               <Route path={PATHS.DASHBOARD} element={<Dashboard />} />
             </Route>
+            <Route path='*' element={<NotFound />} />
+            <Route path={PATHS.Profile} element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </Suspense>

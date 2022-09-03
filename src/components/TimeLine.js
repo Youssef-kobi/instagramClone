@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import Skeleton from 'react-loading-skeleton'
 import usePhotos from '../hooks/use-photos'
-import Post from './posts/Post'
+import Post from './Posts/Post'
 
 const TimeLine = () => {
   const photos = usePhotos()
