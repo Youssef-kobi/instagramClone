@@ -23,7 +23,7 @@ const Login = () => {
     }
   }
   useEffect(() => {
-    document.title = 'Login - Instagram'
+    document.title = 'Sign In - Instagram'
   }, [])
 
   return (
