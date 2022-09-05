@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Header from '../components/Header'
 import * as PATHS from '../constants/routes'
 import { getUserByUsername } from '../services/firebase'
 import UserProfile from '../components/Profile/UserProfile'
@@ -23,11 +22,8 @@ const Profile = () => {
   }, [username, Navigate])
 
   return userProfile?.username ? (
-    <div className='bg-gray-background'>
-      <Header />
-      <div className='mx-auto max-w-screen-lg'>
-        <UserProfile userProfile={userProfile} />
-      </div>
+    <div className='mx-auto max-w-screen-lg'>
+      <UserProfile userProfile={userProfile} />
     </div>
   ) : null
 }

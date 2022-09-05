@@ -6,6 +6,7 @@ import {
   Navigate,
   Outlet,
 } from 'react-router-dom'
+import Header from './components/Header'
 import * as PATHS from './constants/routes'
 import UserContext from './context/user'
 import useAuthListener from './hooks/use-auth-listener'
@@ -18,7 +19,13 @@ const Profile = lazy(() => import('./pages/Profile'))
 
 const PrivateOutlet = () => {
   const { user } = useAuthListener()
-  return user ? <Outlet /> : <Navigate to={PATHS.LOGIN} />
+  return user ? (
+    <div className='bg-gray-background '>
+      <Header /> <Outlet />
+    </div>
+  ) : (
+    <Navigate to={PATHS.LOGIN} />
+  )
 }
 const PublicOutlet = () => {
   const { user } = useAuthListener()
@@ -35,8 +42,8 @@ const App = () => {
 
   return (
     <UserContext.Provider value={value}>
-      <Suspense fallback={<p>Loading...</p>}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Suspense fallback={<p>Loading...</p>}>
           <Routes>
             <Route element={<PublicOutlet />}>
               <Route path={PATHS.LOGIN} element={<Login />} />
@@ -44,12 +51,12 @@ const App = () => {
             </Route>
             <Route element={<PrivateOutlet />}>
               <Route path={PATHS.DASHBOARD} element={<Dashboard />} />
+              <Route path={PATHS.Profile} element={<Profile />} />
+              <Route path='*' element={<NotFound />} />
             </Route>
-            <Route path='*' element={<NotFound />} />
-            <Route path={PATHS.Profile} element={<Profile />} />
           </Routes>
-        </BrowserRouter>
-      </Suspense>
+        </Suspense>
+      </BrowserRouter>
     </UserContext.Provider>
   )
 }
