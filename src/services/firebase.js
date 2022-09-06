@@ -29,7 +29,7 @@ export const getSuggestedProfiles = async (userId, following) => {
   query =
     (await following.length) > 0
       ? query.where('userId', 'not-in', [...following, userId])
-      : query.where('userId', '!==', userId)
+      : query.where('userId', '!=', userId)
   const result = await query.limit(10).get()
   const profiles = result.docs.map((doc) => ({ ...doc.data(), docId: doc.id }))
   // const profiles = result.docs

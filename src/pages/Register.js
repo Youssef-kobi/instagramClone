@@ -52,6 +52,7 @@ const Register = () => {
         setError(Error.message)
       }
     else {
+      setUsername('')
       setError('that username already exist')
     }
   }
@@ -91,7 +92,7 @@ const Register = () => {
             <input
               aria-label='Enter your full name'
               type='text'
-              placeholder='Full Name'
+              placeholder='Full name'
               onChange={({ target }) => setFullName(target.value)}
               className='text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2'
               value={fullName}

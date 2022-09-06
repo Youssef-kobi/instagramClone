@@ -51,8 +51,8 @@ const App = () => {
             </Route>
             <Route element={<PrivateOutlet />}>
               <Route path={PATHS.DASHBOARD} element={<Dashboard />} />
-              <Route path={PATHS.Profile} element={<Profile />} />
               <Route path='*' element={<NotFound />} />
+              <Route path={PATHS.Profile} element={<Profile />} />
             </Route>
           </Routes>
         </Suspense>
