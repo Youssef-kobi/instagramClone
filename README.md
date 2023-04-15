@@ -1,7 +1,8 @@
 <h1 align="center">
   <br>
-  <img src="https://user-images.githubusercontent.com/52678976/188252738-bfd70786-b201-4fc3-8ad1-64bde8906403.png" alt="Instagram Clone" width="200">
+  <img src="https://user-images.githubusercontent.com/52678976/232175597-ca2035d3-58b0-46a5-84a4-2adb92c0b834.png" alt="Instagram Clone" width="200">
   <br>
+
   Instagram Clone
   <br>
 </h1>
